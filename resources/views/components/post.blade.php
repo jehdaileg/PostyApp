@@ -3,6 +3,19 @@
 <div>
     <!-- Order your soul. Reduce your wants. - Augustine -->
     <div class="mb-2">
+
+
+        @if($post->user->profil)
+
+        <img class="inline object-cover w-12 h-12 mr-2 rounded-full" src="{{ asset('storage/' .$post->user->profil) }}"/>
+
+        @else
+
+        <div></div>
+
+        @endif
+
+
         <a href="{{ route('users.post', $post->user) }}" class="font-bold">{{ $post->user->name }}</a> <span class="text-gray-600">{{ $post->created_at->diffForHumans() }}</span>
 
         <p class="font-medium p-2">{{ $post->body }}</p>

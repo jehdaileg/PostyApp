@@ -9,7 +9,7 @@
             <div class="w-4/12 rounded-lg bg-white p-6">
                 <h5 class="flex items-center justify-center mb-3">Create an Account Here</h5>
 
-                <form action="{{ route('register') }}" method="post">
+                <form action="{{ route('register') }}" method="post" enctype="multipart/form-data">
                    @csrf
                    <div class="mb-4">
                        <label for="name" class="sr-only">Name:</label>
@@ -77,6 +77,19 @@
 
                        @enderror
                    </div>
+
+
+                   <div class="mb-4">
+
+                    <label
+                    class="w-64 flex flex-col items-center px-4 py-6 bg-white rounded-md shadow-md tracking-wide uppercase border border-blue cursor-pointer hover:bg-purple-600 hover:text-white text-purple-600 ease-linear transition-all duration-150">
+                    <i class="fa fa-cloud-upload" aria-hidden="true"></i>
+                    <span class="mt-2 text-base leading-normal">Select a profil image</span>
+                    <input type='file' class="hidden" name="profil" />
+                  </label>
+
+                   </div>
+
 
                    <button type="submit" class="bg-blue-500 text-white w-full rounded px-4 py-3 font-medium">Register</button>
                 </form>

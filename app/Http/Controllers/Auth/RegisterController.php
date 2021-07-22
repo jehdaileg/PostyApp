@@ -33,20 +33,25 @@ class RegisterController extends Controller
             'name'=> 'required|max:250',
             'username'=>'required|max:50',
             'email'=>'required|email|unique:users,email',
-            'password'=>'required|max:8|confirmed'
+            'password'=>'required|max:8|confirmed',
+            'profil' => 'sometimes|image|max:5000',
 
         ]);
 
 
         /* Creating User */
 
-        User::create([
+      $user =  User::create([
 
             'name'=>$request->name,
             'username'=>$request->username,
             'email'=>$request->email,
             'password'=>Hash::make($request->password)
         ]);
+
+        /*After cerate the user, we call the function storeImage in order to take and store the choosen image */
+
+        $this->storeImage($user);
 
         /*  Authenticate the user and login him directly  */
 
@@ -57,5 +62,19 @@ class RegisterController extends Controller
         return redirect()->route('dashboard');
 
     }
+
+  public function storeImage(User $user)
+  {
+
+    if(request('profil'))
+    {
+        //dd(request('profil'));
+
+        $user->update([
+            'profil'=>request('profil')->store('avatars', 'public'),
+        ]);
+    }
+
+  }
 
 }
